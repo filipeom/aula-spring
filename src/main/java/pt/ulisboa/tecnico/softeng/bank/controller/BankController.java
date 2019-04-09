@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import pt.ulisboa.tecnico.softeng.bank.domain.Bank;
 import pt.ulisboa.tecnico.softeng.bank.domain.Client;
-import pt.ulisboa.tecnico.softeng.bank.dto.BankDto;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 
 @Controller
@@ -22,22 +21,22 @@ public class BankController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String bankForm(Model model) {
 		logger.info("bankForm");
-		model.addAttribute("bank", new BankDto());
+		model.addAttribute("bank", new Bank());
 		model.addAttribute("banks", Bank.banks);
-		return "banksView";
+		return "banks";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String bankSubmit(Model model, @ModelAttribute BankDto bankDto) {
-		logger.info("bankSubmit name:{}, code:{}", bankDto.getName(), bankDto.getCode());
+	public String bankSubmit(Model model, @ModelAttribute Bank bank) {
+		logger.info("bankSubmit name:{}, code:{}", bank.getName(), bank.getCode());
 
 		try {
-			new Bank(bankDto.getName(), bankDto.getCode());
+			new Bank(bank.getName(), bank.getCode());
 		} catch (BankException be) {
 			model.addAttribute("error", "Error: it was not possible to create the bank");
-			model.addAttribute("bank", bankDto);
+			model.addAttribute("bank", bank);
 			model.addAttribute("banks", Bank.banks);
-			return "banksView";
+			return "banks";
 		}
 
 		return "redirect:/banks";
@@ -53,6 +52,6 @@ public class BankController {
 		new Client(bank, "ID02", "Manel", 44);
 
 		model.addAttribute("bank", bank);
-		return "bankView";
+		return "bank";
 	}
 }
