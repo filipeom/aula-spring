@@ -16,9 +16,25 @@
 			Welcome to Bank <span th:text="${bank.name}">Name</span>
 		</h2>
 
-		<h3>Clients</h3>
-		<p th:each="client: ${bank.clients}" th:text="${client.name}">Client</p>
-
+    <div class="row">
+		  <h3>Clients</h3>
+    </div>
+    <div class="row col-md-6">
+      <table class="table table-striped">
+        <thead>
+          <th>Identifier</th>
+          <th>Name</th>
+          <th>Age</th>
+        </thead>
+        <tbody>
+          <tr th:each="client: ${bank.clients}">
+            <td th:text="${client.id}">Id</td>
+            <td th:text="${client.name}">Name</td>
+            <td th:text="${client.age}">Age</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 	</div>
 </body>
 </html>
