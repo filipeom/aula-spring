@@ -73,6 +73,13 @@ public class Bank {
 		this.clients = clients;
 	}
 
+  public Client getClientById(String id) {
+    for (Client client : getClients())
+      if (client.getId().equals(id))
+        return client;
+    return null;
+  }
+
 	public static Bank getBankByCode(String code) {
 		for (Bank bank : banks) {
 			if (bank.getCode().equals(code)) {

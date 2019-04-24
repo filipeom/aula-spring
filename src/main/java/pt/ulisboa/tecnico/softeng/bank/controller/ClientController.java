@@ -45,4 +45,16 @@ public class ClientController {
 
     return "redirect:/banks/" + code + "/clients";
   }
+
+  @RequestMapping(value = "/client/{id}", method = RequestMethod.GET)
+  public String showClient(Model model, @PathVariable String code, @PathVariable String id) {
+    logger.info("clientSubmit bankCode:{}, clientId:{}", code , id);
+
+    Bank bank = Bank.getBankByCode(code);
+
+    Client client = bank.getClientById(id);
+
+    model.addAttribute("client", client);
+    return "client";
+  }
 }

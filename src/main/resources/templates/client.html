@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Client</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
+
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+    <div class="row">
+      <h2>Client <span th:text="${client.name}"></span></h2>
+    </div>
+    <div class="row col-md-6">
+      <table class="table table-striped">
+        <thead>
+          <th>Identifier</th>
+          <th>Name</th>
+          <th>Age</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td th:text="${client.id}">Id</td>
+            <td th:text="${client.name}">Name</td>
+            <td th:text="${client.age}">Age</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+	</div>
+</body>
+</html>
