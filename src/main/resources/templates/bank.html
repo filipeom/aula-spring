@@ -22,15 +22,11 @@
     <div class="row col-md-6">
       <table class="table table-striped">
         <thead>
-          <th>Identifier</th>
           <th>Name</th>
-          <th>Age</th>
         </thead>
         <tbody>
           <tr th:each="client: ${bank.clients}">
-            <td th:text="${client.id}">Id</td>
             <td th:text="${client.name}">Name</td>
-            <td th:text="${client.age}">Age</td>
           </tr>
         </tbody>
       </table>
