@@ -14,13 +14,13 @@ import pt.ulisboa.tecnico.softeng.bank.domain.Client;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 
 @Controller
-@RequestMapping(value = "/banks/bank/{code}/clients")
+@RequestMapping(value = "/banks/{code}/clients")
 public class ClientController {
-	private static Logger logger = LoggerFactory.getLogger(ClientController.class);
+  private static Logger logger = LoggerFactory.getLogger(ClientController.class);
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String clientForm(Model model, @PathVariable String code) {
-		logger.info("clientForm");
+  @RequestMapping(method = RequestMethod.GET)
+  public String clientForm(Model model, @PathVariable String code) {
+    logger.info("clientForm");
 
     Bank bank = Bank.getBankByCode(code);
 
@@ -30,25 +30,19 @@ public class ClientController {
       model.addAttribute("banks", Bank.banks);
       return "banks";
     }
-		model.addAttribute("client", new Client());
-		model.addAttribute("bank", bank);
-		return "clients";
-	}
+    model.addAttribute("client", new Client());
+    model.addAttribute("bank", bank);
+    return "clients";
+  }
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String clientSubmit(Model model, @PathVariable String code, @ModelAttribute Client client) {
-		logger.info("clientSubmit bankCode:{}, clientName:{}, age:{}", code , client.getName());
+  @RequestMapping(method = RequestMethod.POST)
+  public String clientSubmit(Model model, @PathVariable String code, @ModelAttribute Client client) {
+    logger.info("clientSubmit bankCode:{}, clientName:{}", code , client.getName());
 
-	    Bank bank = Bank.getBankByCode(code);
+    Bank bank = Bank.getBankByCode(code);
 
-    if (bank == null) {
-      model.addAttribute("error", "Error: it does not exist a bank with the code " + code);
-      model.addAttribute("bank", new Bank());
-      model.addAttribute("banks", Bank.banks);
-      return "banks";
-    }
-		new Client(bank, client.getId(), client.getName(), client.getAge());
+    new Client(bank, client.getId(), client.getName(), client.getAge());
 
-		return "redirect:/banks/bank/" + code + "/clients";
-	}
+    return "redirect:/banks/" + code + "/clients";
+  }
 }

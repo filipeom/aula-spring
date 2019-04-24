@@ -41,17 +41,4 @@ public class BankController {
 
 		return "redirect:/banks";
 	}
-
-	@RequestMapping(value = "/bank/{code}", method = RequestMethod.GET)
-	public String showBank(Model model, @PathVariable String code) {
-		logger.info("showBank code:{}", code);
-
-		Bank bank = Bank.getBankByCode(code);
-
-		new Client(bank, "ID01", "Zé", 22);
-		new Client(bank, "ID02", "Manel", 44);
-
-		model.addAttribute("bank", bank);
-		return "bank";
-	}
 }
